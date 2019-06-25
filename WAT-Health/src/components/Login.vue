@@ -2,8 +2,6 @@
   <div class="login container">
     <img class="mb-4" src="../assets/img-01.png" width="200" height="200">
     <form class="form-signin">
-      <h1 class="text-center"><b>WATHealth</b></h1>
-    <br>
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control" placeholder="Email address" v-model="email" required
@@ -110,9 +108,6 @@
           let dd = new Date();
           data["timestamp"] = dd.getDate() + '/' + this.months[dd.getMonth()] + '/' + dd.getFullYear();
           let db = firebase.firestore();
-          db.settings({
-            timestampsInSnapshots: true
-          });
           db.collection('Users').doc(this.user.uid).collection("Emotions").add(data)
             .then((docRef) => {
               console.log("Data successfully saved to firebase: " + docRef);

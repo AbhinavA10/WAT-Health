@@ -91,7 +91,7 @@
         <hr>
         <chart></chart>
         <div class="container-fluid text-center">
-          <p>Charts, take a survey, Diary/Journal...</p>
+          <p>Chart of Emotions Over Time</p>
         </div>
         <Ask></Ask>
         <div class="fixed" style="font-family: 'Roboto Slab', serif">

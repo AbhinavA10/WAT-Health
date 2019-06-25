@@ -6,6 +6,15 @@ An online, community powered forum for helping people tackle mental health issue
 
 Also offers analytical  tools and helplines for immediate assistance and resources for dealing with emergency crisis.
 
+Login Screen:
+
+![Login Screen](\WAT-Health\images\1_login.png)
+
+
+User Dashboard / Analytics Page
+
+![Analytics Page](\WAT-Health\images\3_AnalyticsPage.png)
+
 ## The Problem Space
 
 While researching about the stigma behind talking openly about mental health issue, we found that some major problems that people face are: fear and shame of feeling weak, lack of awareness even with abundant resources, and the lack of a community who share the same problems to discuss these issues.
@@ -16,7 +25,7 @@ WATHealth aims to tackle all these problems by offering complete **anonymity** b
 ## What are the problems with existing solutions?
 Stigma behind openly talking about mental health issues with the lack of awareness and readily available resources. Lack of a community to share problems with no direct connection to professionals.
 
-## How are we special
+## How we are special
 This is completely free with no hidden costs while it is 100% anonymous. A unique 'buddy' system to assign people to partners for support. A community of people who share the same issues. Directly sending your data to professionals and using the power of data. 
 
 ## Future Additions

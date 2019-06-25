@@ -2,9 +2,10 @@
 
 Firebase Needs Node 10. Not 12
 
-`npm install -g firebase-tools`
-
-`firebase login`
+```bash
+npm install -g firebase-tools
+firebase login
+```
 
 > A Vue.js project
 

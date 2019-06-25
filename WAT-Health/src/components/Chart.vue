@@ -14,9 +14,9 @@
     name: "Chart",
     mounted() {
       let db = firebase.firestore();
-      db.settings({
-        timestampsInSnapshots: true
-      });
+      //db.settings({
+        //timestampsInSnapshots: true
+      //});
       let data = {};
       data['times'] = [];
       data['angerScores'] = [];

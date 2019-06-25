@@ -30,9 +30,9 @@
       ask() {
         if (this.content !== "") {
           let db = firebase.firestore();
-          db.settings({
-            timestampsInSnapshots: false
-          });
+          //db.settings({
+            //timestampsInSnapshots: false
+          //});
           let data = {};
           data['Title'] = this.content.substr(0, this.content.indexOf(" ")) || "LOL";
           data['comment'] = this.content;
