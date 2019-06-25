@@ -8,12 +8,12 @@ Also offers analytical  tools and helplines for immediate assistance and resourc
 
 Login Screen:
 
-![Login Screen](\WAT-Health\images\1_login.png)
+![Login Screen](/WAT-Health/images/1_login.png)
 
 
 User Dashboard / Analytics Page
 
-![Analytics Page](\WAT-Health\images\3_AnalyticsPage.png)
+![Analytics Page](/WAT-Health/images/3_AnalyticsPage.png)
 
 ## The Problem Space
 
