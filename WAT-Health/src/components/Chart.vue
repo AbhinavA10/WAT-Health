@@ -12,6 +12,9 @@
   import firebase from 'firebase';
   export default {
     name: "Chart",
+    created() {
+      this.userID = this.$route.params.id; // get the user's firebase id from the url
+    },
     mounted() {
       let db = firebase.firestore();
       //db.settings({
@@ -26,13 +29,11 @@
       data['analyticalScores'] = [];
       data['confidentScores'] = [];
       data['tentativeScores'] = [];
-
-      // this currently gets dummy user data from firebase
-      db.collection("Users").doc('dummyDataUser').collection("Emotions").get()
+      db.collection("Users").doc(this.userID).collection("Emotions").get()
         .then((snapshot) => {
           snapshot.forEach(postEmotionData => {
-            //console.log(postEmotionData.id, " => ", postEmotionData.data().value);
-            data['times'].push(postEmotionData.data().timePost);
+            // add user's emotion data to data to graph on the chart
+            data['times'].push(postEmotionData.data().timestamp);
             data['angerScores'].push(postEmotionData.data().values[0]);
             data['fearScores'].push(postEmotionData.data().values[1]);
             data['joyScores'].push(postEmotionData.data().values[2]);
@@ -111,7 +112,7 @@
                 display: true,
                 scaleLabel: {
                   display: true,
-                  labelString: 'Post Date'
+                  labelString: 'Post Date - M/D/Y'
                 }
               }]
             }
@@ -121,7 +122,7 @@
         .catch(function (error) {
           console.log("Error getting documents: ", error);
         });
-      console.log("I AM HERE !!!!!!");
+      console.log("Finished creating chart");
     }
   }
 </script>

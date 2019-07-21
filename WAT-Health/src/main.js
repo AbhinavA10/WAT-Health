@@ -8,7 +8,7 @@ import firebase from 'firebase'
 Vue.config.productionTip = false;
 
 
-// Initialize Firebase
+// Initialize Firebase, with my own db for testing
 let config = {
   apiKey: "AIzaSyDll8W-fibwM_jClufRiqCsRlGeA7Dl9pw",
   authDomain: "wat-health.firebaseapp.com",

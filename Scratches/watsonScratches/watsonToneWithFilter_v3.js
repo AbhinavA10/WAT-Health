@@ -1,5 +1,3 @@
-// TODO: implement multiple queries on watson for each post
-
 var ToneAnalyzerV3 = require('watson-developer-cloud/tone-analyzer/v3');
 var toneAnalyzer = new ToneAnalyzerV3({
 	version: '2017-09-21',

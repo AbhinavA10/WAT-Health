@@ -1,3 +1,4 @@
+<!-- Card used to display posts on the Newsfeed page -->
 <template>
   <div style="font-family: 'Comic Sans MS'">
     <div class="card">

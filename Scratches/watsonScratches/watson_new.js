@@ -1,33 +1,23 @@
-//Firebase Cloud functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-const functions = require('firebase-functions');
-
-// The Firebase Admin SDK to access the Firebase DB
-const admin = require('firebase-admin');
-admin.initializeApp();
-
 var ToneAnalyzerV3 = require('ibm-watson/tone-analyzer/v3');
+
 var toneAnalyzer = new ToneAnalyzerV3({
 	version: '2017-09-21',
 	iam_apikey: 'MKC6ePTUwjYpdzZzDjbtnVNdLodAgvWBUfwR3gwS3d0n',
 	url: 'https://gateway-wdc.watsonplatform.net/tone-analyzer/api'
 });
-
-/**
- * Calls Watson's Tone Analyzer API to get emotions of text
- * @param {*} textToAnalyze The text to send to watson
- */
 function getTones(textToAnalyze) {
 	return new Promise(function (resolve, reject) {
-		console.log("Tone Analyzer running inside function");
+		console.log("Tone Analyzer running");
 		toneAnalyzer.tone({
 			tone_input: textToAnalyze,
 			content_type: 'text/plain'
-		}, function (err, data) {
+		}, function (err, res) {
 			if (err)
 				reject(err);
 			else {
+
+				// console.log('RESULT FROM WATSON============');
+				// console.log(JSON.stringify(res, null, 2));
                 /* 
                 Watson API returns something like this. document_tone contains the analysis for the tones in the overall document
                 {
@@ -58,7 +48,7 @@ function getTones(textToAnalyze) {
                          ]
                 }
                 */
-				let doc_tone = data["document_tone"]; // get only the overall paragraph data
+				let doc_tone = res["document_tone"]; // get only the overall paragraph data
 				let tonesReturned = doc_tone["tones"]; // get the tones out of that overall data
 				resolve(tonesReturned);
 			}
@@ -66,12 +56,7 @@ function getTones(textToAnalyze) {
 	})
 }
 
-/**
- * Uses the data returned from Watson, to create an array of the document's emotion values
- * @param {object} tonesReturned 
- * @param {Date} date 
- */
-function parseWatsonResponse(tonesReturned, date) {
+function useData(tonesReturned, date) {
 	let emotions = [
 		"anger",
 		"fear",
@@ -90,32 +75,13 @@ function parseWatsonResponse(tonesReturned, date) {
 	return dataToReturn;
 }
 
-/**
- * Firebase cloud function to update emotion data in user doc when a new post is created
- * https://firebase.google.com/docs/functions/firestore-events#trigger_a_function_when_a_new_document_is_created
- */
-exports.updateEmotion = functions.firestore
-	.document('/Posts/{postUUID}')
-	.onCreate((snap, context) => {
-		// Get an object representing the document
-		// {comment: 'post details here', 'Title':'post title here', 'User':'userUUID here'}
-		const newData = snap.data();
+var textToTry = 'Team, I know that times are tough! Product '
+	+ 'sales have been disappointing for the past three '
+	+ 'quarters. We have a competitive product, but we '
+	+ 'need to do a better job of selling it!';
 
-		// access a particular field as you would any JS property
-		let text = newData.comment;
-		let userUUID = newData.User;
-		let datePosted = newData.postDate.toDate();
-
-		// Sends data to Watson
-		return getTones(text).then((watsonResult) => {
-			
-			let dataToAdd = parseWatsonResponse(response, datePosted);
-
-			admin.firestore().collection("Users").doc(userUUID).collection("Emotions").add(dataToAdd)
-				.then((docRef) => {
-					console.log("Emotion Data from post successfully saved to firebase: " + docRef);
-				}).catch(err => {
-					console.log("Error setting data: " + err);
-				});
-		}).catch((err) => { });
-	});
+getTones(textToTry).then((response) => {
+	//console.log(response);
+	let parsed = useData(response, new Date(Date.now()));
+	console.log(parsed);
+}).catch((err) => { console.log(err) });

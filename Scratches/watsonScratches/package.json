@@ -1,0 +1,15 @@
+{
+  "name": "watsonscratches",
+  "version": "1.0.0",
+  "description": "",
+  "main": "graphing.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ibm-watson": "^4.2.5",
+    "watson-developer-cloud": "^4.0.1"
+  }
+}

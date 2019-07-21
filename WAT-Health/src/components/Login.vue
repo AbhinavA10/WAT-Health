@@ -77,13 +77,13 @@
     },
     methods: {
       signIn() {
-        console.log(this.email);
-        console.log(this.password);
+        //console.log(this.email);
         if (this.email !== "" && this.password !== "") {
           console.log(`Trying to sign in.`);
           firebase.auth().signInWithEmailAndPassword(this.email, this.password).then((user) => {
             if (user) {
               this.user = user['user'];
+              console.log('Signed in')
               $('#exampleModal').modal("toggle");
             } else {
               console.log("Not Signed In.");
@@ -103,14 +103,15 @@
           for (let i = 0; i < this.emotions.length; i++) {
             ans.push(0);
           }
+          console.log(this.email);
           ans[index] = 1;
           data["values"] = ans;
           let dd = new Date();
-          data["timestamp"] = dd.getDate() + '/' + this.months[dd.getMonth()] + '/' + dd.getFullYear();
+          data["timestamp"] = dd.getMonth() + '/' + dd.getDate() + '/' + dd.getFullYear();
           let db = firebase.firestore();
           db.collection('Users').doc(this.user.uid).collection("Emotions").add(data)
             .then((docRef) => {
-              console.log("Data successfully saved to firebase: " + docRef);
+              console.log("Emotion Data on login successfully saved to firebase: " + docRef);
               console.log(this.user.uid);
               this.$router.push(`dashboard/${this.user.uid}`);
             }).catch(err => {
